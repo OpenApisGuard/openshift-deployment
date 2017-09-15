@@ -39,7 +39,7 @@ It will be better to create MySQL service first before creating Tomcat service s
 3. oc delete imagestream <SERVICE_NAME>
 4. oc delete route <SERVICE_NAME>
 
-* Optional: Kubernetes has an easy way to let you set and change properties by using configmap
+* Optional: Kubernetes has an easy way to let you set and change properties by using [ConfigMap](https://kubernetes.io/docs/tasks/configure-pod-container/configmap/)
 1. Create configmap from local properties file
 oc create configmap config --from-file=application.properties
 
