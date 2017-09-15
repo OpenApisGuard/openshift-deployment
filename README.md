@@ -1,4 +1,4 @@
-#Openshift online 3 local war file deployment to Tomcat and MySQL docker containers
+# Openshift online 3 local war file deployment to Tomcat and MySQL docker containers
 
 ## Overview
 This tutorial will walk you through on how to deploy WAR file from your local machine to Openshift online 3 and setup Tomcat and MySQL services in separate Kubernetes pods
