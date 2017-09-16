@@ -16,7 +16,7 @@ It will be better to create MySQL service first before creating Tomcat service s
 1. Follow UI instruction to create MySQL service.  You can manually type in user name and password or let Openshift to auto generate them.  You can view your MySQL credentials in the web console under Resources -> Secrets -> <MYSQL_SERVICE_NAME>
 2. For import DDL and data, mysqldump is not working but you can run SQL statements either in MySQL service terminal by clicking the Kubernetes pod icon -> terminal or open shell terminal locally by following <Open terminal locally> in Misc section listed below
 
-### Deployment steps:
+### WAR deployment to Tomcat 8:
 1. Create a new Tomcat service <SERVICE_NAME>
 * oc new-build jboss-webserver30-tomcat8-openshift --name=<SERVICE_NAME> --binary=true
 2. On local macahine
