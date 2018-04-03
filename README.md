@@ -48,3 +48,6 @@ oc create configmap config --from-file=application.properties
 1. oc login https://api.starter-us-COAST-NUM.openshift.com:443
 2. oc get pod
 3. oc exec -it <POD_NAME> sh
+
+### Minishift
+*  minishift start --vm-driver=virtualbox
