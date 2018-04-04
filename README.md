@@ -50,4 +50,11 @@ oc create configmap config --from-file=application.properties
 3. oc exec -it <POD_NAME> sh
 
 ### Minishift
-*  minishift start --vm-driver=virtualbox
+*  Startup minishift
+   minishift start --vm-driver=virtualbox
+* Connect local docker to minishift docker machine
+1. minishift docker-env
+2. eval $(minishift docker-env)
+3. docker ps
+4. If got error: Error response from daemon: client is newer than server (client API version: 1.24, server API version: 1.23)
+   export DOCKER_API_VERSION=1.23
