@@ -52,9 +52,24 @@ oc create configmap config --from-file=application.properties
 ### Minishift
 *  Startup minishift
    minishift start --vm-driver=virtualbox
-* Connect local docker to minishift docker machine
-1. minishift docker-env
-2. eval $(minishift docker-env)
-3. docker ps
-4. If got error: Error response from daemon: client is newer than server (client API version: 1.24, server API version: 1.23)
-   export DOCKER_API_VERSION=1.23
+* Deploy/push local docker images to Openshift (Minishift) image registry
+1. Create new user (NEW_USER_ID) with cluster admin role
+   oc create clusterrolebinding registry-controller --clusterrole=cluster-admin --user=NEW_USER_ID
+2. Login to local minishift openshift origin in browser https://127.0.0.1:8443 with userId: NEW_USER_ID with any password
+3. Select "default" project and expand "docker-registry" deployment in Overview
+4. Add route to expose docker-registry service by clicking "Create route" link
+5. Docker needs secure protocol for login
+   Select Applications -> Routes -> docker-registry on left menu, then check "secure route" and save
+6. Add minishift docker image registry as trusted registry because cert is self signed
+   In mac docker, select Perferences -> Daemon, add docker-registry-default.127.0.0.0.nip.io to insecure registries and click "Apply & restart"
+7. docker login -u NEW_USER_ID docker-registry-default.127.0.0.0.nip.io
+   User token can be found in "Command Line Tools" under upper right "?" drop down menu
+8. Create docker image stream
+   oc create is IMAGE_STREAM_NAME -n PROJECT_NAMESPACE
+9. Tag desired docker image to minishift image registry
+   docker tag DOCKER_IMAGE docker-registry-default.127.0.0.1.nip.io/PROJECT_NAMESPACE/IMAGE_STREAM_NAME
+10. Push image to minishift image registry
+   docker push docker-registry-default.127.0.0.1.nip.io/PROJECT_NAMESPACE/IMAGE_STREAM_NAME
+11. Deploy image to project
+   Go to https://127.0.0.1:8443 -> Add to Project -> Deploy image -> Image Stream Tag -> PROJECT_NAMESPACE ->       IMAGE_STREAM_NAME -> latest, and click "Deploy"
+12. Create route to expose the service
