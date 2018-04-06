@@ -64,12 +64,12 @@ oc create configmap config --from-file=application.properties
    In mac docker, select Perferences -> Daemon, add docker-registry-default.127.0.0.0.nip.io to insecure registries and click "Apply & restart"
 7. docker login -u NEW_USER_ID docker-registry-default.127.0.0.0.nip.io
    User token can be found in "Command Line Tools" under upper right "?" drop down menu
-8. Create docker image stream
+8. Create docker image stream:
    oc create is IMAGE_STREAM_NAME -n PROJECT_NAMESPACE
-9. Tag desired docker image to minishift image registry
+9. Tag desired docker image to minishift image registry:
    docker tag DOCKER_IMAGE docker-registry-default.127.0.0.1.nip.io/PROJECT_NAMESPACE/IMAGE_STREAM_NAME
-10. Push image to minishift image registry
+10. Push image to minishift image registry:
    docker push docker-registry-default.127.0.0.1.nip.io/PROJECT_NAMESPACE/IMAGE_STREAM_NAME
-11. Deploy image to project
+11. Deploy image to project:
    Go to https://127.0.0.1:8443 -> Add to Project -> Deploy image -> Image Stream Tag -> PROJECT_NAMESPACE ->       IMAGE_STREAM_NAME -> latest, and click "Deploy"
 12. Create route to expose the service
