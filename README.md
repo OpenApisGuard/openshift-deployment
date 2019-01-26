@@ -17,8 +17,8 @@ It will be better to create MySQL service first before creating Tomcat service s
 2. For import DDL and data, mysqldump is not working but you can run SQL statements either in MySQL service terminal by clicking the Kubernetes pod icon -> terminal or open shell terminal locally by following <Open terminal locally> in Misc section listed below
 
 ### WAR deployment to Tomcat 8:
-1. Create a new Tomcat service <SERVICE_NAME>
-* oc new-build jboss-webserver30-tomcat8-openshift --name=<SERVICE_NAME> --binary=true
+1. Create a new Tomcat service <SERVICE_NAME> from openshift image stream
+* oc new-build jboss-webserver31-tomcat8-openshift:1.2 --name=<SERVICE_NAME> --binary=true
 2. On local macahine
 * Modify JDBC database connection URL and credentials in your property files and build the WAR file <helloWorld.war>
 * Create new directories <PROJ_DIR_NAME>/deployments
